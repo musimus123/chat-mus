@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panel Electrónica Bernal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+
+background:#050816;
+color:white;
+padding:30px;
+}
+
+h1{
+
+margin-bottom:20px;
+text-align:center;
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+margin-bottom:25px;
+}
+
+.card{
+
+background:#111827;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:
+0 0 15px #00ffff33;
+}
+
+.card h2{
+
+font-size:18px;
+
+margin-bottom:10px;
+
+color:#00ffff;
+}
+
+.card p{
+
+font-size:30px;
+font-weight:bold;
+}
+
+.table-box{
+
+background:#111827;
+
+padding:20px;
+
+border-radius:20px;
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+}
+
+th{
+
+color:#00ffff;
+
+padding:12px;
+
+text-align:left;
+}
+
+td{
+
+padding:12px;
+
+border-bottom:1px solid #333;
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:10px;
+}
+
+table{
+
+font-size:12px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+    <a href="/logout">
+
+        <button style="
+        padding:10px;
+        border:none;
+        border-radius:10px;
+        background:#ff0055;
+        color:white;
+        cursor:pointer;
+        margin-bottom:20px;
+        ">
+        
+        Cerrar Sesión
+        
+        </button>
+        
+        </a>
+        
+<h1>⚡ Panel Electrónica Bernal ⚡</h1>
+
+<div class="dashboard">
+
+<div class="card">
+<h2>Total Mensajes</h2>
+<p>{{ total_mensajes }}</p>
+</div>
+
+<div class="card">
+<h2>Usuarios Conectados</h2>
+<p>{{ usuarios }}</p>
+</div>
+
+<div class="card">
+<h2>Usuarios Únicos</h2>
+<p>{{ usuarios_unicos }}</p>
+</div>
+
+<div class="card">
+<h2>Mensajes Hoy</h2>
+<p>{{ mensajes_hoy }}</p>
+</div>
+
+</div>
+
+<div class="table-box">
+
+<h2 style="margin-bottom:20px">
+Últimos Mensajes
+</h2>
+
+<table>
+
+<tr>
+<th>Usuario</th>
+<th>Mensaje</th>
+<th>Fecha</th>
+</tr>
+
+{% for m in mensajes %}
+
+<tr>
+<td>{{ m[0] }}</td>
+<td>{{ m[1] }}</td>
+<td>{{ m[2] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+<script>
+
+    setInterval(function(){
+    
+        location.reload();
+    
+    }, 2000);
+    
+    </script>
+</html>
