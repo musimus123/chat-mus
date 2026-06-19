@@ -1,6 +1,8 @@
-flask
-flask-socketio
-gunicorn
+Flask
+Flask-SocketIO
+python-socketio
+python-engineio
 eventlet
 python-telegram-bot
-requests
+reportlab
+gunicorn
