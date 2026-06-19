@@ -19,7 +19,9 @@ from telegram_bot.bot import (
     configurar_socketio
 )
 
-TELEGRAM_TOKEN = "8630774263:AAHrVBCWDKUaz5zzRSN1qEIAoKJ9m5acGCw"
+import os
+
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 
 usuarios_conectados = 0
 usuarios_socket = {}
