@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Panel Electrónica Bernal</title>
+<title>Panel WolfTrónica</title>
 
 <style>
 
@@ -17,15 +19,69 @@ font-family:Segoe UI,sans-serif;
 
 body{
 
-background:#050816;
+background:
+linear-gradient(
+135deg,
+#021124,
+#041f3f,
+#062a4f
+);
+
+min-height:100vh;
+
+padding:25px;
+
 color:white;
-padding:30px;
 }
 
-h1{
+.header{
 
-margin-bottom:20px;
-text-align:center;
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+margin-bottom:25px;
+}
+
+.logo-box{
+
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo-box img{
+
+width:70px;
+height:70px;
+
+border-radius:50%;
+
+box-shadow:
+0 0 15px #00d4ff;
+}
+
+.logo-box h1{
+
+color:#00d4ff;
+font-size:32px;
+}
+
+.logout{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:12px;
+
+background:#00d4ff;
+
+color:black;
+
+font-weight:bold;
+
+cursor:pointer;
 }
 
 .dashboard{
@@ -33,47 +89,62 @@ text-align:center;
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
+repeat(auto-fit,minmax(220px,1fr));
 
 gap:20px;
 
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 .card{
 
-background:#111827;
+background:#0b1730;
+
+padding:25px;
+
+border-radius:20px;
+
+border:1px solid #00d4ff33;
+
+box-shadow:
+0 0 20px #00d4ff22;
+}
+
+.card h2{
+
+font-size:16px;
+
+margin-bottom:10px;
+
+color:#00d4ff;
+}
+
+.card p{
+
+font-size:34px;
+
+font-weight:bold;
+}
+
+.table-box{
+
+background:#0b1730;
 
 padding:25px;
 
 border-radius:20px;
 
 box-shadow:
-0 0 15px #00ffff33;
+0 0 20px #00d4ff22;
 }
 
-.card h2{
+.table-title{
 
-font-size:18px;
+font-size:24px;
 
-margin-bottom:10px;
+margin-bottom:20px;
 
-color:#00ffff;
-}
-
-.card p{
-
-font-size:30px;
-font-weight:bold;
-}
-
-.table-box{
-
-background:#111827;
-
-padding:20px;
-
-border-radius:20px;
+color:#00d4ff;
 }
 
 table{
@@ -85,9 +156,11 @@ border-collapse:collapse;
 
 th{
 
-color:#00ffff;
+padding:15px;
 
-padding:12px;
+background:#081425;
+
+color:#00d4ff;
 
 text-align:left;
 }
@@ -96,20 +169,46 @@ td{
 
 padding:12px;
 
-border-bottom:1px solid #333;
+border-bottom:1px solid #1f355e;
+}
+
+tr:hover{
+
+background:#102040;
+}
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+opacity:.7;
 }
 
 @media(max-width:768px){
 
-body{
+.header{
 
-padding:10px;
+flex-direction:column;
+gap:15px;
+}
+
+.logo-box h1{
+
+font-size:24px;
+}
+
+.card p{
+
+font-size:26px;
 }
 
 table{
 
 font-size:12px;
 }
+
 }
 
 </style>
@@ -117,70 +216,117 @@ font-size:12px;
 </head>
 
 <body>
-    <a href="/logout">
 
-        <button style="
-        padding:10px;
-        border:none;
-        border-radius:10px;
-        background:#ff0055;
-        color:white;
-        cursor:pointer;
-        margin-bottom:20px;
-        ">
-        
-        Cerrar Sesión
-        
+<div class="header">
+
+<div class="logo-box">
+
+<img src="/static/logo.jpg">
+
+<h1>WolfTrónica Admin</h1>
+
+</div>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+    <a href="/logout">
+        <button class="logout">
+            Cerrar Sesión
         </button>
-        
-        </a>
-        
-<h1>⚡ Panel Electrónica Bernal ⚡</h1>
+    </a>
+
+    <a href="/pdf">
+        <button class="logout">
+            📄 Exportar PDF
+        </button>
+    </a>
+
+    <button onclick="activarAudio()" class="logout">
+        🔔 Activar sonido
+    </button>
+
+</div>
+
+</div>
 
 <div class="dashboard">
 
 <div class="card">
-<h2>Total Mensajes</h2>
-<p>{{ total_mensajes }}</p>
+
+<h2>📨 Total Mensajes</h2>
+
+<p id="totalMensajes">{{ total_mensajes }}</p>
+
 </div>
 
 <div class="card">
-<h2>Usuarios Conectados</h2>
-<p>{{ usuarios }}</p>
+
+<h2>🟢 Usuarios Conectados</h2>
+
+<p id="usuariosConectados">{{ usuarios }}</p>
+
 </div>
 
 <div class="card">
-<h2>Usuarios Únicos</h2>
-<p>{{ usuarios_unicos }}</p>
+
+<h2>👥 Usuarios Únicos</h2>
+
+<p id="usuariosUnicos">{{ usuarios_unicos }}</p>
+
 </div>
 
 <div class="card">
-<h2>Mensajes Hoy</h2>
-<p>{{ mensajes_hoy }}</p>
+
+<h2>📅 Mensajes Hoy</h2>
+
+<p id="mensajesHoy">{{ mensajes_hoy }}</p>
+
 </div>
 
 </div>
 
 <div class="table-box">
 
-<h2 style="margin-bottom:20px">
+<h2 class="table-title">
+
 Últimos Mensajes
+
 </h2>
+
+<input
+id="buscar"
+type="text"
+placeholder="Buscar mensaje o usuario..."
+style="
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:10px;
+">
 
 <table>
 
-<tr>
-<th>Usuario</th>
-<th>Mensaje</th>
-<th>Fecha</th>
-</tr>
+    <thead>
+    <tr>
+    <th>Usuario</th>
+    <th>Mensaje</th>
+    <th>Fecha</th>
+    </tr>
+    </thead>
+    
+    <tbody id="tablaMensajes">
+    
+    {% for m in mensajes %}
+    <tr>
+    ...
 
-{% for m in mensajes %}
-
-<tr>
 <td>{{ m[0] }}</td>
+
 <td>{{ m[1] }}</td>
+
 <td>{{ m[2] }}</td>
+
 </tr>
 
 {% endfor %}
@@ -189,14 +335,170 @@ font-size:12px;
 
 </div>
 
-</body>
+<div class="footer">
+
+WolfTrónica © 2026
+
+</div>
+
+<audio id="notif" controls>
+    <source src="/static/notificacion.mp3" type="audio/mpeg">
+</audio>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
 <script>
 
-    setInterval(function(){
-    
-        location.reload();
-    
-    }, 2000);
-    
-    </script>
+const socket = io();
+
+socket.on("connect", function(){
+
+    console.log("✅ Admin conectado");
+
+});
+
+socket.on("nuevo_mensaje_admin", function(data){
+
+    console.log("RECIBIDO");
+    console.log(data);
+
+    alert("Telegram/Admin: " + data.text);
+
+    console.log("ADMIN RECIBIÓ:", data);
+
+    alert("Nuevo mensaje recibido");
+
+    console.log("📩 Nuevo mensaje:", data);
+
+    const audio =
+    document.getElementById("notif");
+
+    if(audio){
+
+        audio.currentTime = 0;
+
+        audio.play()
+        .then(function(){
+
+            console.log("🔊 Sonido reproducido");
+
+        })
+        .catch(function(error){
+
+            console.log("❌ Audio bloqueado:", error);
+
+        });
+
+    }
+
+    const tabla =
+    document.getElementById("tablaMensajes");
+
+    if(tabla){
+
+        const fila =
+        tabla.insertRow(1);
+
+        fila.insertCell(0).innerHTML =
+        data.user;
+
+        fila.insertCell(1).innerHTML =
+        data.text;
+
+        fila.insertCell(2).innerHTML =
+        data.time;
+
+    }
+
+    const total =
+    document.getElementById("totalMensajes");
+
+    if(total){
+
+        total.innerHTML =
+        parseInt(total.innerHTML) + 1;
+
+    }
+
+    const hoy =
+    document.getElementById("mensajesHoy");
+
+    if(hoy){
+
+        hoy.innerHTML =
+        parseInt(hoy.innerHTML) + 1;
+
+    }
+
+});
+
+socket.on("usuarios", function(cantidad){
+
+    console.log("👥 Usuarios:", cantidad);
+
+    const usuarios =
+    document.getElementById("usuariosConectados");
+
+    if(usuarios){
+
+        usuarios.innerHTML =
+        cantidad;
+
+    }
+
+});
+
+function activarAudio(){
+
+const audio =
+document.getElementById("notif");
+
+audio.play()
+.then(() => {
+
+    audio.pause();
+    audio.currentTime = 0;
+
+    alert("Sonido activado");
+
+})
+.catch(err => {
+
+    console.log(err);
+
+});
+
+}
+
+document
+.getElementById("buscar")
+.addEventListener("keyup", function(){
+
+let filtro =
+this.value.toLowerCase();
+
+let filas =
+document.querySelectorAll(
+"#tablaMensajes tr"
+);
+
+filas.forEach((fila,index)=>{
+
+if(index===0) return;
+
+let texto =
+fila.innerText.toLowerCase();
+
+fila.style.display =
+texto.includes(filtro)
+? ""
+: "none";
+
+});
+
+});
+
+</script>
+
+</body>
 </html>

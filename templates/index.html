@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>UDABOL NEON CHAT</title>
+<title>WolfTrónica Chat</title>
 
 <style>
 
@@ -14,97 +14,164 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
 
-min-height:100vh;
+height:100vh;
+
+background:
+linear-gradient(
+135deg,
+#021124,
+#041f3f,
+#062a4f
+);
 
 display:flex;
 justify-content:center;
 align-items:center;
+}
+
+#welcome{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(
+135deg,
+#021124,
+#062a4f
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.welcome-box{
+
+width:90%;
+max-width:450px;
+
+background:#0b1730;
+
+padding:30px;
+
+border-radius:25px;
+
+text-align:center;
+
+box-shadow:
+0 0 25px #00d4ff55;
+}
+
+.welcome-box img{
+
+width:180px;
+margin-bottom:20px;
+}
+
+.welcome-box h1{
+
+color:#00d4ff;
+margin-bottom:15px;
+}
+
+.welcome-box p{
+
+color:#ddd;
+margin-bottom:20px;
+}
+
+.welcome-box input{
+
+width:100%;
+padding:15px;
+
+border:none;
+outline:none;
+
+border-radius:15px;
+
+margin-bottom:15px;
+}
+
+.welcome-box button{
+
+width:100%;
 
 padding:15px;
 
-background:
-radial-gradient(circle at top left,#00ffff22,transparent 35%),
-radial-gradient(circle at bottom right,#ff00ff22,transparent 35%),
-#050816;
+border:none;
+
+border-radius:15px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+background:#00d4ff;
+color:black;
 }
 
 .chat-container{
 
 width:100%;
-max-width:500px;
+max-width:550px;
 
-height:90vh;
+height:95vh;
 
-background:rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.1);
-
-overflow:hidden;
+background:#0b1730;
 
 display:flex;
 flex-direction:column;
 
+border-radius:25px;
+
+overflow:hidden;
+
 box-shadow:
-0 0 20px #00ffff55,
-0 0 40px #ff00ff33;
+0 0 30px #00d4ff44;
 }
 
 .header{
 
-padding:18px;
+padding:15px;
+
+background:#081425;
 
 text-align:center;
+}
 
-font-size:22px;
-font-weight:bold;
+.header img{
 
-color:white;
+width:80px;
+}
 
-background:
-linear-gradient(
-90deg,
-#00ffff,
-#8b5cf6,
-#ff00ff
-);
+.header h2{
+
+color:#00d4ff;
+margin-top:5px;
 }
 
 .online{
 
-padding:8px;
+padding:10px;
+
+background:#102040;
 
 text-align:center;
 
-background:#0f172a;
-
-color:#00ffff;
-
+color:#00d4ff;
 font-weight:bold;
-}
-
-.login{
-
-padding:12px;
-
-display:flex;
-
-gap:10px;
-
-background:#0f172a;
-}
-
-.login input{
-
-flex:1;
 }
 
 .chat{
@@ -123,66 +190,51 @@ gap:10px;
 
 .message{
 
-max-width:80%;
-
 padding:12px;
 
 border-radius:15px;
 
-background:
-rgba(255,255,255,.08);
+background:#122545;
+
+max-width:80%;
 
 color:white;
-
-word-break:break-word;
-
-animation:show .2s ease;
 }
 
-.message.own{
+.own{
 
-align-self:flex-end;
+margin-left:auto;
 
-background:
-linear-gradient(
-135deg,
-#ff00ff,
-#8b5cf6
-);
+background:#00d4ff;
+
+color:black;
 }
 
 .user{
 
-font-size:11px;
-
+font-size:12px;
 font-weight:bold;
-
-color:#00ffff;
-
-margin-bottom:5px;
 }
 
 .time{
 
 font-size:10px;
-
 opacity:.7;
-
 margin-top:5px;
 }
 
 .input-area{
 
-padding:12px;
+padding:10px;
 
 display:flex;
 
 gap:10px;
 
-background:#0f172a;
+background:#081425;
 }
 
-input{
+.input-area input{
 
 flex:1;
 
@@ -190,86 +242,24 @@ padding:12px;
 
 border:none;
 
-outline:none;
-
 border-radius:12px;
-
-background:
-rgba(255,255,255,.08);
-
-color:white;
 }
 
-button{
+.input-area button{
 
-padding:12px 16px;
+padding:12px 20px;
 
 border:none;
 
 border-radius:12px;
 
+background:#00d4ff;
+
 cursor:pointer;
-
 font-weight:bold;
-
-background:
-linear-gradient(
-135deg,
-#00ffff,
-#ff00ff
-);
-
-color:white;
 }
 
-button:hover{
-
-transform:scale(1.03);
-}
-
-.chat::-webkit-scrollbar{
-
-width:6px;
-}
-
-.chat::-webkit-scrollbar-thumb{
-
-background:#00ffff;
-border-radius:10px;
-}
-
-@keyframes show{
-
-from{
-opacity:0;
-transform:translateY(10px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-@media(max-width:768px){
-
-.chat-container{
-
-max-width:100%;
-height:95vh;
-}
-
-.header{
-
-font-size:20px;
-}
-}
-
-@media(max-width:480px){
-
-body{
-padding:0;
-}
+@media(max-width:600px){
 
 .chat-container{
 
@@ -277,15 +267,6 @@ height:100vh;
 border-radius:0;
 }
 
-.header{
-
-font-size:18px;
-}
-
-.message{
-
-max-width:95%;
-}
 }
 
 </style>
@@ -294,40 +275,70 @@ max-width:95%;
 
 <body>
 
-<div class="chat-container">
+<div id="welcome">
 
-<div class="header">
-⚡ UDABOL CHAT ⚡
-</div>
+<div class="welcome-box">
 
-<div id="onlineUsers" class="online">
-🟢 Usuarios conectados: 0
-</div>
+<img src="/static/logo.jpg">
 
-<div class="login">
+<h1>WolfTrónica Chat</h1>
+
+<p>Ingresa tu nombre para acceder</p>
 
 <input
 type="text"
-id="nombre"
-placeholder="Tu nombre">
+id="nombre">
 
-<button onclick="guardarNombre()">
-Entrar
+<button onclick="entrar()">
+
+Ingresar
+
 </button>
 
 </div>
 
-<div id="chat" class="chat"></div>
+</div>
+
+<div class="chat-container">
+
+<div class="header">
+
+<img src="/static/logo.jpg">
+
+<h2>WolfTrónica</h2>
+
+</div>
+
+<div id="onlineUsers" class="online">
+
+🟢 Usuarios conectados: 0
+
+</div>
+
+<div id="typing" style="
+height:25px;
+padding:5px;
+text-align:center;
+color:#00d4ff;
+font-size:12px;
+">
+</div>
+
+<div id="chat" class="chat">
+
+</div>
 
 <div class="input-area">
 
 <input
-type="text"
 id="mensaje"
+type="text"
 placeholder="Escribe un mensaje...">
 
 <button onclick="enviar()">
-➤
+
+Enviar
+
 </button>
 
 </div>
@@ -340,66 +351,69 @@ placeholder="Escribe un mensaje...">
 
 const socket = io();
 
-let nombre = "";
+let nombre="";
 
-function guardarNombre(){
+function entrar(){
 
-let n =
+let n=
 document.getElementById("nombre").value.trim();
 
 if(n===""){
 
 alert("Ingresa tu nombre");
 return;
+
 }
 
-nombre = n;
+nombre=n;
 
-document.querySelector(".login")
+socket.emit(
+    "usuario_conectado",
+    nombre
+);
+
+document.getElementById("welcome")
 .style.display="none";
+
 }
 
 function enviar(){
 
-if(nombre===""){
+if(nombre==="") return;
 
-alert("Primero ingresa tu nombre");
-return;
-}
+let texto=
+document.getElementById("mensaje").value.trim();
 
-let input =
-document.getElementById("mensaje");
+if(texto==="") return;
 
-let texto =
-input.value.trim();
-
-if(texto===""){
-return;
-}
-
-const data = {
+const data={
 
 user:nombre,
 
 text:texto,
 
-time:new Date().toLocaleTimeString([],{
-hour:'2-digit',
-minute:'2-digit'
-})
+time:new Date().toLocaleTimeString()
 
 };
 
-socket.send(
-JSON.stringify(data)
-);
+socket.send(JSON.stringify(data));
 
-input.value="";
+document.getElementById("mensaje").value="";
+
 }
 
 document
 .getElementById("mensaje")
 .addEventListener("keypress",e=>{
+
+if(nombre!==""){
+
+socket.emit(
+"escribiendo",
+nombre
+);
+
+}
 
 if(e.key==="Enter"){
 
@@ -410,21 +424,49 @@ enviar();
 });
 
 fetch("/historial")
-.then(res => res.json())
-.then(datos => {
+.then(r=>r.json())
+.then(datos=>{
 
-datos.forEach(data => {
+datos.forEach(data=>{
+
+agregarMensaje(data);
+
+});
+
+});
+
+socket.on("message", function(msg){
+
+let data;
+
+if(typeof msg === "string"){
+
+    data = JSON.parse(msg);
+
+}else{
+
+    data = msg;
+
+}
+
+agregarMensaje(data);
+
+});
+
+socket.on(
+"mensaje_sistema",
+function(data){
 
 const div =
 document.createElement("div");
 
-div.className = "message";
+div.style.textAlign="center";
+div.style.color="#00d4ff";
+div.style.fontSize="12px";
+div.style.margin="5px";
 
-div.innerHTML = `
-<div class="user">${data.user}</div>
-<div>${data.text}</div>
-<div class="time">${data.time}</div>
-`;
+div.innerHTML =
+data.text;
 
 document
 .getElementById("chat")
@@ -432,23 +474,9 @@ document
 
 });
 
-});
+function agregarMensaje(data){
 
-socket.on("message",msg=>{
-
-let data;
-
-try{
-
-data = JSON.parse(msg);
-
-}catch{
-
-return;
-
-}
-
-const div =
+const div=
 document.createElement("div");
 
 div.className="message";
@@ -486,16 +514,66 @@ document
 .getElementById("chat")
 .scrollHeight;
 
+}
+
+socket.on("usuarios",function(cantidad){
+
+document.getElementById("onlineUsers")
+.innerHTML=
+"🟢 Usuarios conectados: " + cantidad;
+
 });
 
-socket.on("usuarios", function(cantidad){
+socket.on(
+"mensaje_sistema",
+function(texto){
 
-document.getElementById("onlineUsers").innerHTML =
-"🟢 Usuarios conectados: " + cantidad;
+const div =
+document.createElement("div");
+
+div.style.textAlign="center";
+div.style.color="#00d4ff";
+div.style.fontSize="12px";
+div.style.margin="5px";
+
+div.innerHTML=texto;
+
+document
+.getElementById("chat")
+.appendChild(div);
+
+});
+
+socket.on(
+"nombre_ocupado",
+function(){
+
+alert(
+"Este nombre ya está conectado"
+);
+
+location.reload();
+
+});
+
+socket.on(
+"mostrar_escribiendo",
+function(usuario){
+
+document.getElementById("typing")
+.innerHTML=
+usuario + " está escribiendo...";
+
+setTimeout(function(){
+
+document.getElementById("typing")
+.innerHTML="";
+
+},1500);
 
 });
 
 </script>
 
 </body>
-</html>
+</html> 
